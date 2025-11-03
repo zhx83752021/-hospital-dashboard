@@ -1,0 +1,204 @@
+// 全局样式
+
+// 颜色变量
+$primary-color: #1890ff;
+$success-color: #52c41a;
+$warning-color: #faad14;
+$danger-color: #f5222d;
+$info-color: #13c2c2;
+
+$bg-dark: #0a1929;
+$bg-card: rgba(26, 35, 50, 0.8);
+$border-color: rgba(255, 255, 255, 0.1);
+
+// 文字颜色
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.75);
+$text-muted: rgba(255, 255, 255, 0.45);
+
+// 卡片组件
+.dashboard-card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: clamp(12px, 1.5vh, 20px) clamp(12px, 1.5vw, 20px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-title {
+    font-size: clamp(13px, 1.1vw, 16px);
+    font-weight: bold;
+    color: $text-primary;
+    margin-bottom: clamp(4px, 0.5vh, 8px);
+    padding-bottom: clamp(4px, 0.5vh, 8px);
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 0.5vw, 8px);
+    flex-shrink: 0;
+  }
+
+  > div:not(.card-title) {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+// 统计卡片
+.stat-card {
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.1) 0%, rgba(24, 144, 255, 0.05) 100%);
+  border: 1px solid rgba(24, 144, 255, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(24, 144, 255, 0.2);
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: $text-secondary;
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: $primary-color;
+    line-height: 1;
+  }
+
+  .stat-unit {
+    font-size: 14px;
+    color: $text-muted;
+    margin-left: 4px;
+  }
+
+  .stat-trend {
+    margin-top: 8px;
+    font-size: 12px;
+
+    &.up {
+      color: $success-color;
+    }
+
+    &.down {
+      color: $danger-color;
+    }
+  }
+}
+
+// 数据表格
+.data-table {
+  width: 100%;
+  color: $text-primary;
+
+  thead {
+    tr {
+      background: rgba(24, 144, 255, 0.1);
+      border-bottom: 2px solid $primary-color;
+    }
+
+    th {
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    td {
+      padding: 12px;
+      font-size: 14px;
+    }
+  }
+}
+
+// 状态徽章
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &.success {
+    background: rgba(82, 196, 26, 0.2);
+    color: $success-color;
+    border: 1px solid $success-color;
+  }
+
+  &.warning {
+    background: rgba(250, 173, 20, 0.2);
+    color: $warning-color;
+    border: 1px solid $warning-color;
+  }
+
+  &.danger {
+    background: rgba(245, 34, 45, 0.2);
+    color: $danger-color;
+    border: 1px solid $danger-color;
+  }
+
+  &.info {
+    background: rgba(19, 194, 194, 0.2);
+    color: $info-color;
+    border: 1px solid $info-color;
+  }
+}
+
+// 动画
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+// 隐藏滚动条（大屏不需要滚动条）
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+// 确保所有元素不显示滚动条
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+

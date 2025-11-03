@@ -1,0 +1,35 @@
+services:
+  # 后端 API 服务
+  - type: web
+    name: hospital-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: REDIS_HOST
+        sync: false
+      - key: REDIS_PORT
+        sync: false
+      - key: REDIS_PASSWORD
+        sync: false
+      - key: REDIS_TLS
+        value: true
+      - key: CORS_ORIGIN
+        sync: false
+    healthCheckPath: /health
+    
+  # 如果在 Render 部署前端（可选）
+  # - type: web
+  #   name: hospital-frontend
+  #   env: static
+  #   buildCommand: cd frontend && npm install && npm run build
+  #   staticPublishPath: ./frontend/dist
+  #   routes:
+  #     - type: rewrite
+  #       source: /*
+  #       destination: /index.html
+

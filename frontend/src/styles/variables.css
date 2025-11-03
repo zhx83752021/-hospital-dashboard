@@ -1,0 +1,129 @@
+/* 全局CSS变量 - 智慧大屏配色方案 */
+:root {
+  /* 背景色 */
+  --bg-primary: #0a1429;
+  --bg-secondary: rgba(10, 25, 50, 0.85);
+  --bg-card: rgba(12, 28, 58, 0.8);
+  --bg-tooltip: rgba(15, 30, 55, 0.95);
+  
+  /* 边框颜色 */
+  --border-primary: #1a5c9e;
+  --border-light: rgba(42, 130, 228, 0.4);
+  --border-glow: rgba(0, 212, 255, 0.6);
+  
+  /* 图表配色 */
+  --chart-orange: #ff9843;
+  --chart-yellow: #ffc107;
+  --chart-cyan: #00d4ff;
+  --chart-blue: #1890ff;
+  --chart-green: #13c2c2;
+  --chart-teal: #1de9b6;
+  
+  /* 文字颜色 */
+  --text-primary: #e6f7ff;
+  --text-secondary: #91d5ff;
+  --text-highlight: #40a9ff;
+  --text-warning: #faad14;
+  --text-disabled: #434343;
+  
+  /* 状态颜色 */
+  --status-pending: #ff9843;
+  --status-processing: #ffc107;
+  --status-completed: #00d4ff;
+  --status-success: #13c2c2;
+  --status-warning: #faad14;
+  --status-error: #ff4d4f;
+}
+
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--chart-blue);
+}
+
+/* 卡片通用样式 */
+.card-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: none !important;
+}
+
+/* 标题样式 */
+.card-title,
+.panel-title {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 12px;
+  margin-bottom: 12px;
+}
+
+/* 数字高亮 */
+.number-highlight {
+  color: var(--chart-cyan);
+  font-weight: bold;
+  font-family: 'DIN Alternate', 'Arial', monospace;
+}
+
+/* 状态标签 */
+.status-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.status-tag.pending {
+  background: rgba(255, 152, 67, 0.2);
+  color: var(--status-pending);
+  border: 1px solid var(--status-pending);
+}
+
+.status-tag.processing {
+  background: rgba(255, 193, 7, 0.2);
+  color: var(--status-processing);
+  border: 1px solid var(--status-processing);
+}
+
+.status-tag.completed {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--status-completed);
+  border: 1px solid var(--status-completed);
+}
+
+.status-tag.success {
+  background: rgba(19, 194, 194, 0.2);
+  color: var(--status-success);
+  border: 1px solid var(--status-success);
+}
+
