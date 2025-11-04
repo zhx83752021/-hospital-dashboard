@@ -12,7 +12,10 @@ import { useDataStore } from '@/stores/data'
 const dataStore = useDataStore()
 
 const chartOption = computed(() => {
-  const departments = dataStore.departmentData || []
+  // 确保 departments 是数组
+  const departments = Array.isArray(dataStore.departmentData) 
+    ? dataStore.departmentData 
+    : []
   
   return {
     tooltip: {

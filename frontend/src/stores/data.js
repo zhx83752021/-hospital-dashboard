@@ -141,6 +141,26 @@ export const useDataStore = defineStore('data', () => {
     }))
   }
 
+  // 确保数据是数组格式
+  const ensureArray = (data) => {
+    if (!data) return []
+    if (Array.isArray(data)) return data
+    // 如果返回的是对象，尝试提取 data 字段
+    if (typeof data === 'object' && data.data && Array.isArray(data.data)) {
+      return data.data
+    }
+    // 如果返回的是对象，尝试提取其他可能的数组字段
+    if (typeof data === 'object') {
+      const arrayFields = ['list', 'items', 'results', 'departments', 'equipment', 'trends']
+      for (const field of arrayFields) {
+        if (Array.isArray(data[field])) {
+          return data[field]
+        }
+      }
+    }
+    return []
+  }
+
   // 获取所有数据
   const fetchAllData = async () => {
     try {
@@ -152,21 +172,26 @@ export const useDataStore = defineStore('data', () => {
         api.getPatientTrend().catch(() => null)
       ])
 
+      // 确保数组数据格式正确
+      const departmentArray = ensureArray(department)
+      const equipmentArray = ensureArray(equipment)
+      const trendArray = ensureArray(trend)
+
       // 如果 API 调用成功，使用真实数据；否则使用模拟数据
-      if (operation) operationData.value = operation
-      if (bed) bedData.value = bed
-      if (department && department.length > 0) departmentData.value = department
-      if (equipment && equipment.length > 0) equipmentData.value = equipment
-      if (trend && trend.length > 0) patientTrend.value = trend
+      if (operation && typeof operation === 'object') operationData.value = operation
+      if (bed && typeof bed === 'object') bedData.value = bed
+      if (departmentArray.length > 0) departmentData.value = departmentArray
+      if (equipmentArray.length > 0) equipmentData.value = equipmentArray
+      if (trendArray.length > 0) patientTrend.value = trendArray
 
       // 如果所有 API 都失败，使用模拟数据
-      if (!operation && !bed && (!department || department.length === 0) && 
-          (!equipment || equipment.length === 0) && (!trend || trend.length === 0)) {
+      if (!operation && !bed && departmentArray.length === 0 && 
+          equipmentArray.length === 0 && trendArray.length === 0) {
         console.warn('API 连接失败，使用模拟数据')
         generateMockData()
       } else {
         // 部分数据缺失时，补充模拟数据
-        if (!department || department.length === 0) {
+        if (departmentArray.length === 0) {
           departmentData.value = [
             { name: '内科', workload: 85 },
             { name: '外科', workload: 92 },
@@ -178,7 +203,7 @@ export const useDataStore = defineStore('data', () => {
             { name: '急诊科', workload: 95 }
           ]
         }
-        if (!trend || trend.length === 0) {
+        if (trendArray.length === 0) {
           const hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
           patientTrend.value = hours.map(time => ({
             time,

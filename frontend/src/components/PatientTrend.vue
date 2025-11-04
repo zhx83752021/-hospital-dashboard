@@ -12,7 +12,10 @@ import { useDataStore } from '@/stores/data'
 const dataStore = useDataStore()
 
 const chartOption = computed(() => {
-  const trend = dataStore.patientTrend || []
+  // 确保 trend 是数组
+  const trend = Array.isArray(dataStore.patientTrend) 
+    ? dataStore.patientTrend 
+    : []
   
   return {
     tooltip: {
