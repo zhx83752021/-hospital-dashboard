@@ -139,6 +139,41 @@ export const useDataStore = defineStore('data', () => {
       emergency: Math.floor(Math.random() * 50) + 20,
       inpatient: Math.floor(Math.random() * 100) + 250
     }))
+
+    // 模拟实时消息预警数据
+    const now = new Date()
+    realtimeMessages.value = [
+      {
+        level: 'warning',
+        title: '急诊科床位使用率超过85%',
+        timestamp: new Date(now.getTime() - 5 * 60000).toISOString()
+      },
+      {
+        level: 'info',
+        title: '心内科新增患者2名',
+        timestamp: new Date(now.getTime() - 12 * 60000).toISOString()
+      },
+      {
+        level: 'success',
+        title: '手术室3号手术顺利完成',
+        timestamp: new Date(now.getTime() - 18 * 60000).toISOString()
+      },
+      {
+        level: 'warning',
+        title: 'ICU床位剩余3张，请注意',
+        timestamp: new Date(now.getTime() - 25 * 60000).toISOString()
+      },
+      {
+        level: 'info',
+        title: '影像科CT扫描仪-1待机中',
+        timestamp: new Date(now.getTime() - 32 * 60000).toISOString()
+      },
+      {
+        level: 'success',
+        title: '门诊今日接诊1250人次',
+        timestamp: new Date(now.getTime() - 40 * 60000).toISOString()
+      }
+    ]
   }
 
   // 确保数据是数组格式
@@ -211,6 +246,42 @@ export const useDataStore = defineStore('data', () => {
             emergency: Math.floor(Math.random() * 50) + 20,
             inpatient: Math.floor(Math.random() * 100) + 250
           }))
+        }
+        // 如果没有实时消息且不在生产环境有 WebSocket 连接，初始化模拟消息
+        if (realtimeMessages.value.length === 0) {
+          const now = new Date()
+          realtimeMessages.value = [
+            {
+              level: 'warning',
+              title: '急诊科床位使用率超过85%',
+              timestamp: new Date(now.getTime() - 5 * 60000).toISOString()
+            },
+            {
+              level: 'info',
+              title: '心内科新增患者2名',
+              timestamp: new Date(now.getTime() - 12 * 60000).toISOString()
+            },
+            {
+              level: 'success',
+              title: '手术室3号手术顺利完成',
+              timestamp: new Date(now.getTime() - 18 * 60000).toISOString()
+            },
+            {
+              level: 'warning',
+              title: 'ICU床位剩余3张，请注意',
+              timestamp: new Date(now.getTime() - 25 * 60000).toISOString()
+            },
+            {
+              level: 'info',
+              title: '影像科CT扫描仪-1待机中',
+              timestamp: new Date(now.getTime() - 32 * 60000).toISOString()
+            },
+            {
+              level: 'success',
+              title: '门诊今日接诊1250人次',
+              timestamp: new Date(now.getTime() - 40 * 60000).toISOString()
+            }
+          ]
         }
       }
     } catch (error) {

@@ -29,7 +29,10 @@ import dayjs from 'dayjs'
 const dataStore = useDataStore()
 
 const displayAlerts = computed(() => {
-  return dataStore.realtimeMessages.slice(0, 8).map(msg => ({
+  const messages = Array.isArray(dataStore.realtimeMessages) 
+    ? dataStore.realtimeMessages 
+    : []
+  return messages.slice(0, 8).map(msg => ({
     ...msg,
     time: dayjs(msg.timestamp).format('HH:mm:ss')
   }))
