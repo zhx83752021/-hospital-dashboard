@@ -1,7 +1,10 @@
 import axios from 'axios'
 
+// 使用环境变量配置 API 地址，生产环境需要配置 VITE_API_BASE_URL
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
+
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE_URL,
   timeout: 10000
 })
 
